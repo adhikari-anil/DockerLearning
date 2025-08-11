@@ -1,4 +1,4 @@
-# P2P File Sharing App
+# P2P File Sharing App (still in development phase)
 
 A peer-to-peer file sharing application built with Docker containerization for easy deployment and scalability.
 

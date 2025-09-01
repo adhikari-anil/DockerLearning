@@ -38,23 +38,23 @@ io.on("connection", (socket) => {
   socket.on("joinAsReceiver", (roomData) => {
     console.log("Receiver joining room:", roomData);
     const room = roomData.room;
-    socket.join(room);
-    console.log("Receiver joined room:", room);
-
-    socket.room = room;
-    socket.role = "receiver";
-    socket.username = roomData.username;
-
-    // Notify others in the room (e.g., the sender)
-    socket.to(room).emit("receiver-joined", {
-      message: "A receiver has joined the room.",
-      socketId: socket.id,
-      username: socket.username,
-    });
 
     // 🔍 Check if a sender is already in the room
     const clientsInRoom = io.sockets.adapter.rooms.get(room);
     if (clientsInRoom) {
+      socket.join(room);
+      console.log("Receiver joined room:", room);
+
+      socket.room = room;
+      socket.role = "receiver";
+      socket.username = roomData.username;
+
+      // Notify others in the room (e.g., the sender)
+      socket.to(room).emit("receiver-joined", {
+        message: "A receiver has joined the room.",
+        socketId: socket.id,
+        username: socket.username,
+      });
       for (const clientId of clientsInRoom) {
         const clientSocket = io.sockets.sockets.get(clientId);
         if (clientSocket?.role === "sender") {
@@ -66,6 +66,8 @@ io.on("connection", (socket) => {
           break;
         }
       }
+    } else {
+      socket.emit("invalid-room", { message: "Invalid Room Code" });
     }
   });
 
@@ -116,6 +118,6 @@ io.on("connection", (socket) => {
   });
 });
 
-http.listen(port,"0.0.0.0", () => {
+http.listen(port, "0.0.0.0", () => {
   console.log(`Server is running at http://0.0.0.0:${port}`);
 });

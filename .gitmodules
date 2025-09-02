@@ -1,0 +1,3 @@
+[submodule "p2p/instantShare"]
+	path = p2p/instantShare
+	url = https://github.com/adhikari-anil/InstantShare.git

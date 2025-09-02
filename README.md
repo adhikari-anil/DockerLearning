@@ -20,7 +20,7 @@ Before running this application, make sure you have the following installed:
 ### 1. Clone the Repository
 
 ```bash
-git clone <your-repository-url>
+git clone --recurse-submodules https://github.com/adhikari-anil/DockerLearning.git
 cd p2p
 ```
 ### Open docker desktop before doing any futhur setup processess.
@@ -141,10 +141,11 @@ docker-compose up app
 ## Contributing
 
 1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test with Docker: `docker-compose up --build`
-5. Submit a pull request
+2. Complete setup as mentioned above
+3. Create a feature branch
+4. Make your changes
+5. Test with Docker: `docker-compose up --build`
+6. Submit a pull request
 
 ## License
 
